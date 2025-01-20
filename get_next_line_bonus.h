@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 22:45:46 by hhammouc          #+#    #+#             */
-/*   Updated: 2025/01/18 19:32:27 by hhammouc         ###   ########.fr       */
+/*   Created: 2025/12/24 12:36:31 by hhammouc          #+#    #+#             */
+/*   Updated: 2025/01/20 09:42:27 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
 # endif
-
-# include <limits.h>
+# define FD_MAX 1024
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>

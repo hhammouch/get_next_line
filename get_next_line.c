@@ -6,7 +6,7 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 22:45:27 by hhammouc          #+#    #+#             */
-/*   Updated: 2025/01/20 09:52:24 by hhammouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:02:34 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ char	*get_next_line(int fd)
 	static char	*stash;
 	char		*line;
 	char		*buffer;
+	size_t		size_buf;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	size_buf = BUFFER_SIZE;
+	buffer = (char *)malloc((size_buf + 1) * sizeof(char));
+	if (fd < 0 || size_buf <= 0)
 	{
 		free(stash);
 		free(buffer);
@@ -104,15 +106,20 @@ char	*get_next_line(int fd)
 	stash = line_set(line);
 	return (line);
 }
-// int main ()
-// {
-// 	char	*line;
-// 	int		fd;
-	
-// 	fd = open ("file.txt", O_RDONLY);
-// 	while ((line = get_next_line(fd)) != NULL)
-// 	{
-// 		printf("%s\n",line);
-// 	}
-// 	close (fd);
-// }
+
+#include <stdio.h>
+
+int main ()
+{
+	int fd1 = open("file1.txt", O_RDONLY);
+	char *line1;
+	int i = 1;
+
+	while((line1 = get_next_line(fd1)) != NULL)
+	{
+		printf("%d) -> %s",i,line1);
+		free(line1);
+		i++;
+	}
+}
+

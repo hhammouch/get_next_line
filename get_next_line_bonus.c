@@ -6,7 +6,7 @@
 /*   By: hhammouc <hhammouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 12:34:00 by hhammouc          #+#    #+#             */
-/*   Updated: 2025/01/20 09:43:04 by hhammouc         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:59:40 by hhammouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ char	*get_next_line(int fd)
 	static char	*stash[FD_MAX];
 	char		*line;
 	char		*buffer;
+	size_t		size_buf;
 
+	size_buf = BUFFER_SIZE;
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(stash[fd]);
 		free(buffer);
@@ -105,21 +107,30 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int main ()
-// {
-//     char *line1;
-//     char *line2;
-//     int fd1 = open ("file.txt", O_RDONLY);;
-//     int fd2 = open ("file1.txt", O_RDONLY);;
+#include <stdio.h>
 
-//     while((line1 = get_next_line(fd1)) != NULL)
-//     {
-//         printf("%s",line1);
-//     }
-//     while((line2 = get_next_line(fd2)) != NULL)
-//     {
-//         printf("%s",line2);
-//     }
-//     close(fd1);
-//     close(fd2);
-// }
+int main ()
+{
+	int fd1 = open("file1.txt", O_RDONLY);
+	int fd2 = open("file2.txt", O_RDONLY);
+	char *line1 = get_next_line(fd1);
+	char *line2 = get_next_line(fd2);
+	int i = 1;
+
+	while(line1 || line2)
+	{
+		if (line1)
+		{
+			printf("%d) -> %s",i,line1);
+			free(line1);
+		}
+		if (line2)
+		{
+			printf("%d) -> %s",i,line2);
+			free(line2);
+		}
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
+		i++;
+	}
+}
